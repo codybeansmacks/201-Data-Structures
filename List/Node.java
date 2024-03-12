@@ -1,26 +1,26 @@
 package List;
 
 public class Node {
-    protected int coeff; // Coefficient of the polynomial term
-    protected int expX, expY, expZ; // Exponents for x, y, z
-    protected Node next; // Link to the next node in the list
+    protected int coefficient;
+    protected int expX;
+    protected int expY;
+    protected int expZ;
+    protected Node next;
 
-    // Constructor for the polynomial term node
-    public Node(int coeff, int expX, int expY, int expZ) {
-        this.coeff = coeff;
+    public Node(int coefficient, int expX, int expY, int expZ) {
+        this.coefficient = coefficient;
         this.expX = expX;
         this.expY = expY;
         this.expZ = expZ;
         this.next = null;
     }
 
-    // Getters and setters for the node's data
-    public int getCoeff() {
-        return coeff;
+    public int getCoefficient() {
+        return coefficient;
     }
 
-    public void setCoeff(int coeff) {
-        this.coeff = coeff;
+    public void setCoefficient(int coefficient) {
+        this.coefficient = coefficient;
     }
 
     public int getExpX() {
@@ -55,15 +55,14 @@ public class Node {
         this.next = next;
     }
 
-    // Custom toString method to format the polynomial term
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        if (coeff == -1) {
+        if (coefficient == -1) {
             result.append("-");
-        } else if (coeff != 1) {
-            result.append(coeff);
+        } else if (coefficient != 1) {
+            result.append(coefficient);
         }
         if (expX > 0) {
             result.append("x");
@@ -84,7 +83,7 @@ public class Node {
             }
         }
         if (result.length() == 0 || (result.length() == 1 && result.charAt(0) == '-')) {
-            result.append(coeff);
+            result.append(coefficient);
         }
         return result.toString();
     }
