@@ -1,22 +1,21 @@
-private static void simplifyPolynomial(LinkedList polynomial) {
-    if (polynomial.isEmpty()) return;
+private static LinkedList multiplyPolynomials(LinkedList poly1, LinkedList poly2) {
+    LinkedList result = new LinkedList(); // Start with an empty polynomial for the result.
 
-    Node current = polynomial.getHead();
-    while (current != null && current.getNext() != null) {
-        Node compareWith = current;
-        while (compareWith.getNext() != null) {
-            if (compareTerms(current, compareWith.getNext()) == 0) {
-                // Combine like terms by adding their coefficients
-                current.setCoeff(current.getCoeff() + compareWith.getNext().getCoeff());
-                // Remove the like term
-                compareWith.setNext(compareWith.getNext().getNext());
-                if (compareWith.getNext() == null) {
-                    polynomial.setTail(compareWith); // Update tail if we remove the last element
-                }
-            } else {
-                compareWith = compareWith.getNext();
-            }
+    for (Node ptr1 = poly1.getHead(); ptr1 != null; ptr1 = ptr1.getNext()) {
+        LinkedList tempPoly = new LinkedList();
+        for (Node ptr2 = poly2.getHead(); ptr2 != null; ptr2 = ptr2.getNext()) {
+            // For each pair of terms, multiply and treat as a new temporary polynomial.
+            int coeff = ptr1.getCoeff() * ptr2.getCoeff();
+            int expX = ptr1.getExpX() + ptr2.getExpX();
+            int expY = ptr1.getExpY() + ptr2.getExpY();
+            int expZ = ptr1.getExpZ() + ptr2.getExpZ();
+            
+            // Create a temporary polynomial for the single term product.
+            tempPoly.insertInOrder(coeff, expX, expY, expZ);
         }
-        current = current.getNext();
+        // Add the temporary polynomial to the running result to combine like terms.
+        result = addPolynomials(result, tempPoly);
     }
+    
+    return result;
 }
