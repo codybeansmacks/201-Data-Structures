@@ -1,5 +1,5 @@
 LinkedList product = multiplyPolynomials(poly1, poly2);
-LinkedList simplifiedProduct = simplifyPolynomial(product);
+            return simplifyPolynomial(product);
 
 help
 import List.LinkedList;
